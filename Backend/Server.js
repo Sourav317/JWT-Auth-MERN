@@ -3,14 +3,15 @@ const app = express();
 const mongoose = require('mongoose');
 const axios = require('axios');
 const cors = require('cors');
-const dotenv = require('dotenv');
+require('dotenv').config();
 const route = require('./Routes/Route');
+
 
 app.use(cors());
 app.use(express.json());
 
 //Connect to DB
-mongoose.connect('mongodb+srv://Kuruma:Kuruma123@cluster0.mkcms.mongodb.net/UserData?retryWrites=true&w=majority',() =>{
+mongoose.connect(process.env.Db,() =>{
     console.log('Db Connected');
 })
 

@@ -23,6 +23,19 @@ module.exports.register = async(req,res) => {
 
 }
 
-module.exports.login = (req,res) => {
-    res.send('login working');
+module.exports.login = async (req, res) => {
+	const User = await user.findOne({
+		email: req.body.email,
+        password: req.body.password
+	})
+
+	if (!User) {
+		return { status: 'error', error: 'Invalid login' }
+	}
+    else{
+        res.status(200).send({
+            success : 'true',
+            message : "logged in"
+        })
+    }
 }
